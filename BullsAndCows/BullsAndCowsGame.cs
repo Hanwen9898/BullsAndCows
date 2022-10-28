@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -24,15 +25,20 @@ namespace BullsAndCows
             var guessDigits = guess.Split(' ');
             var secretDigits = secret.Split(' ');
             int countBulls = 0;
+            int countCows = 0;
             for (var index = 0; index < secretDigits.Length; index++)
             {
                 if (guessDigits[index] == secretDigits[index])
                 {
                     countBulls++;
                 }
+                else if (guessDigits[index] != secretDigits[index] && secretDigits.Contains(guessDigits[index]))
+                {
+                    countCows++;
+                }
             }
 
-            return $"{countBulls}A0B";
+            return $"{countBulls}A{countCows}B";
         }
     }
 }
